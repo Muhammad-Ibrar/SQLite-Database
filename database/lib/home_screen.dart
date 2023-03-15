@@ -11,13 +11,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DBHelper? dbHelper;
+  late  Future<List<NotesModel>> notesList;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dbHelper = DBHelper();
+    loadData();
   }
+
+  loadData () async {
+    // notesList = dbHelper!.getNotesList();
+    notesList = dbHelper!.getNotesList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +35,27 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
+          Expanded(
+            child: FutureBuilder(
+              future: notesList,
+                builder: (context ,AsyncSnapshot<List<NotesModel>> snapshot) {
+                return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                    itemBuilder: (context , index) {
+                      return  Card(
+                        child: ListTile(
+                          contentPadding: EdgeInsets.all(0),
+                          title: Text(snapshot.data![index].title.toString()),
+                          subtitle: Text(snapshot.data![index].description.toString()),
+                          trailing: Text(snapshot.data![index].age.toString()),
+                        ),
+                      );
+                    }
+                );
 
+                }
+            ),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
