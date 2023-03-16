@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   loadData () async {
-    // notesList = dbHelper!.getNotesList();
     notesList = dbHelper!.getNotesList();
   }
 

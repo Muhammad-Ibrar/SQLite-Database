@@ -15,13 +15,13 @@ class NotesModel{
 
  });
 
- NotesModel.fromMap(Map<String  , dynamic> res):
+ NotesModel.fromMap(Map<String  , dynamic> data):
 
-     id = res['id'],
-     title = res['title'],
-     age = res['age'],
-     description = res['description'],
-     email = res['email'];
+     id = data['id'],
+     title = data['title'],
+     age = data['age'],
+     description = data['description'],
+     email = data['email'];
 
  Map<String , Object?> toMap(){
 
